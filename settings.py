@@ -20,8 +20,8 @@ class Settings:
     def initialize_speeds(self):
         
         self.bullet_speed = 2.0
-        self.alien_speed = 1.0
-        self.fleet_drop_speed = 5
+        self.alien_speed = 1.5
+        self.fleet_drop_speed = 7
         # 1 is right and -1 is left
         self.fleet_direction = 1
 
