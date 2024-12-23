@@ -17,10 +17,10 @@ class AlienInvasion:
         self.game_active = False
         self.bg_color = (0, 140, 255)
         self.settings = Settings()
-        # self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        # self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        # self.settings.screen_width = self.screen.get_rect().width
+        # self.settings.screen_height = self.screen.get_rect().height
         self.clock = pygame.time.Clock()
         pygame.display.set_caption("Alien Invasion")
         self.ship = Ship(self)
@@ -80,7 +80,7 @@ class AlienInvasion:
         alien_height = alien.rect.height
 
         current_x, current_y = alien_width, alien_height
-        while current_y< (self.settings.screen_height - 2.0*alien_height):
+        while current_y< (self.settings.screen_height - 3.0*alien_height):
             while current_x < self.settings.screen_width:
                 self._create_alien(current_x,current_y)
                 current_x += 2 * alien_width
@@ -140,8 +140,14 @@ class AlienInvasion:
         if self.game_active==False and self.play_button.rect.collidepoint(mouse_pos):
             self.game_active = True
             self.game_stats.reset_stats()
+            self.aliens.empty()
+            self.bullets.empty()
+            self._create_fleet()
+            self.sb.prep_score()
+            self.sb.prep_highscore()
             self.sb.prep_level()
             self.sb.prep_ships()
+            self.sb.show_score()
 
 
     def _fire_bullet(self):
